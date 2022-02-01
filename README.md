@@ -1,4 +1,6 @@
-The algorithm examines each word W from the thousands allowed, calculating the viable solution word that would maximise the number of viable solutions still available if word W were entered next.
+A helper to suggest the next word to enter into worde, based on the green, yellow and grey letters found so far. 
+
+The search algorithm examines each word W from the thousands allowed, calculating the viable solution word that would maximise the number of viable solutions still available if word W were entered next.
 
 The word that minimises that maximum is the one recommended by the algorithm.
 
