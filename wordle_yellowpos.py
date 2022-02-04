@@ -114,11 +114,10 @@ if __name__ == '__main__':
   # green is a single 5 character string that indicate the
   # positions of green squares
   green = '....t'
-  yellow = bitmap('se')
 
   # yellow is a list of 5 character strings that indicate the
   # positions of yellow squares.
-  yellow = ( 'lea..', '.a..e' )
+  yellow = [ 'lea..', '.a..e' ]
 
   # grey is just a bitmap of the grey characters, without
   # regard to their position
