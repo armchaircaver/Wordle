@@ -6,4 +6,4 @@ The word that minimises that maximum is the one recommended by the algorithm.
 
 Using the information (green, yellow, grey) from the first word entered into Wordle, the algorithm typically takes 3 or 4 seconds on a laptop to choose a recommended next word. The run time reduces significantly as information from more words becomes available. 
 
-The best version is wordle_yellowpos.py, which improves on the previous program, wordle_minimax_bitmap.py,  by using the position of yellow letters as well as their existence, and also includes pattern matching.
+The best version is wordle_yellowpos.py, which improves on the previous program, wordle_minimax_bitmap.py,  by using the position of yellow letters as well as their existence, and also includes pattern matching to reduce the set of solution words, by considering the patterns of guesses made by others that have been posted on facebook or elsewhere.
