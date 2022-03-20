@@ -34,8 +34,11 @@ def guessmatch( guesses, inputlist ):
 #----------------------------------------------------------------------------
 
 if __name__=="__main__":
-  pmlist = patternmatch( '..YGG, .G.GG, .GYGG, .YYYY, GYY.G, G.YGG, G.Y.G, GY.GG,G.GGG', solutions)
+  pmlist = patternmatch( 'GGG.., YGY.Y, GG.G., .G.YY,YGY..,.YYG., YG.GY', solutions)
   print ( pmlist )
 
-  g = bestguess(pmlist)
-  print(g)
+  L2 = guessmatch([ ('saner','..GGY'), ], pmlist)
+  print( L2 )
+  
+  g = bestguess(L2)
+  print("best guess: ",g)
