@@ -1,13 +1,23 @@
-A helper to suggest the next word to enter into worde, based on the green, yellow and grey letters found so far. 
+A program to suggest the next word to enter into worde, based on the results of guesses so far.
 
-The search algorithm examines each word W from the thousands allowed, calculating the viable solution word that would maximise the number of viable solutions still available if word W were entered next.
+The program can also analyse the patterns of green, yellow and grey letters that have been posted on facebook or other social media sites for the day's wordle puzzle, reducing the initial set of solution words based on the patterns reported.
 
-The word that minimises that maximum is the one recommended by the algorithm.
+The search algorithm examines each possible guess word from the approx 13,000 allowed guesses, using a recursive algorithm to search the possible trees of guesses to find the one that minimises the average number of guesses needed to solve the puzzle.
 
-Using the information (green, yellow, grey) from the first word entered into Wordle, the algorithm typically takes 3 or 4 seconds on a laptop to choose a recommended next word. The run time reduces significantly as information from more words becomes available. 
+There are several python scripts:
 
-The search algorithm is wordle_yellowpos.py which also includes pattern matching to reduce the initial set of solution words, by considering the patterns of guesses  that have been posted on facebook or elsewhere for the day's wordle.
+- precalculate_patterns.py calculates all the patterns that can occur for each solution word, to build up a map of the patterns that can be associated with each solution word.
 
-precalculate_patterns.py calculates all the patterns that can occur for each solution word.
+- precalculated_patterns.py is the result of this pre-calculation, and is used by wordle_solver.py to eliminate solutions that aren't consistent with the set of patterns reported by other players.
 
-precalculated_patterns.py is the result of this pre-calculation, and is used by wordle_yellowpos.py
+- wordle_recursive.py is the recursive algorithm that searches word trees to find the best guess given the results of words entered so far
+
+- wordle_solver.py a program to enter patterns and guesses made so far into the recursive algorithm, to obtain the best guess for the next word
+
+- wordle optimal tree generator.py  is a program that generates the optimal tree of guesses for a given starting word
+
+The program "wordle optimal tree generator.py" generates a tree with the same average number of guesses, 3.4201, as the optimal search program created by Alex Selby, described in http://sonorouschocolate.com/notes/index.php?title=The_best_strategies_for_Wordle
+
+The file "wordle optimal tree.log" lists this optimal tree.
+
+
