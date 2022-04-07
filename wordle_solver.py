@@ -16,7 +16,7 @@ def patternmatch( patternlist, inputlist ):
   st = perf_counter()
   outputlist = [ w for w in inputlist if patterns <= patterndict[w] ]
   en = perf_counter()
-  print(len(outputlist), "possible solutions after pattern matching, ",round(en-st,4),"sec")
+  #print(len(outputlist), "possible solutions after pattern matching, ",round(en-st,4),"sec")
 
   return outputlist
 #----------------------------------------------------------------------------
@@ -34,11 +34,52 @@ def guessmatch( guesses, inputlist ):
 #----------------------------------------------------------------------------
 
 if __name__=="__main__":
-  pmlist = patternmatch( 'GGG.., YGY.Y, GG.G., .G.YY,YGY..,.YYG., YG.GY', solutions)
-  print ( pmlist )
 
-  L2 = guessmatch([ ('saner','..GGY'), ], pmlist)
-  print( L2 )
+  inputdata =  b"""
+salet ...G.
+YY.G.
+"""
   
-  g = bestguess(L2)
-  print("best guess: ",g)
+  blines = inputdata.split(b'\n')
+
+  W = solutions[:]
+  
+  for bline in blines:
+    line = bline.decode("utf-8")
+    print("\n",line)
+    
+    if len(line)==0:
+      continue
+    
+    words = line.split()
+    if len(words)==1:
+      # assume it is a pattern
+      W = patternmatch( words[0], W)
+      print( len(W), "words")
+      if len(W)<150:
+        print(W)
+    else:
+      # assume a word and a pattern
+      W = guessmatch( [ (words[0],words[1]), ], W )
+      print( len(W), "words")
+      if len(W)<150:
+        print(W)
+  # special matching
+  
+  """
+  W = [w for w in W
+       if len([ x for x in alloptions if x[0]+x[2]+x[3]+x[4] == w[0]+w[2]+w[3]+w[4] ]) > 4]
+  print( "special matching", len(W), "words")
+  if len(W)<150:
+    print(W)
+  W = [w for w in W
+       if len([ x for x in alloptions
+                if x[1]+x[2]+x[0] == w[1]+w[2]+w[0]]) > 3]
+  print( "special matching", len(W), "words")
+  if len(W)<150:
+    print(W)
+  """
+
+  g = bestguess(W, printProgress=True)
+  print("\nbest guess: ",g)  
+     

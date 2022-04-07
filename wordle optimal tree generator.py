@@ -1,8 +1,8 @@
 from wordlists import solutionlist
-from wordle_recursive import bestguess,setVerbose, pattern, allpatterns, clearcaches
+from wordle_recursive import bestguess,setVerbose, pattern, allpatterns, clearcaches, bestguess_stats
 from time import perf_counter
 from collections import defaultdict
-
+import statistics
 
 setVerbose(False)
 solutions = [s for s in solutionlist.split(",")]
@@ -42,13 +42,19 @@ def traverse(depth, startguess, inputlist):
       totalsolsfound +=1 
       totalguesses += depth
     else:  
-      g2 = bestguess( pg[p] )
+      g2 = bestguess( pg[p] )[1]
       traverse(depth+1,  g2, pg[p] )
-    
+
+starttime = perf_counter()    
 traverse(1, 'salet', solutions )
+endtime = perf_counter()    
 
 print("total solutions found", totalsolsfound)
 print("total guesses ", totalguesses)
 print("average = ", totalguesses/totalsolsfound)
+print( round(endtime-starttime,2),"sec")
+for n in sorted(bestguess_stats):
+  print(n, len(bestguess_stats[n]), statistics.mean(bestguess_stats[n])
+               , min(bestguess_stats[n]), max(bestguess_stats[n]))
 
 
