@@ -6,9 +6,7 @@ The search algorithm examines each possible guess word from the approx 13,000 al
 
 There are several python scripts:
 
-- precalculate_patterns.py calculates all the patterns that can occur for each solution word, to build up a map of the patterns that can be associated with each solution word.
-
-- precalculated_patterns.py is the result of this pre-calculation, and is used by wordle_solver.py to eliminate solutions that aren't consistent with the set of patterns reported by other players.
+- precalculated_pattern_counts.py is a map of the count of patterns that can occur for each solution word, and is used by wordle_solver.py to eliminate solutions that aren't consistent with the set of patterns reported by other players.
 
 - wordle_recursive.py is the recursive algorithm that searches word trees to find the best guess given the results of words entered so far
 
