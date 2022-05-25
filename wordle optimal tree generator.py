@@ -1,11 +1,10 @@
-from wordlists import solutionlist
+from wordlists import solutions
 from wordle_recursive import bestguess,setVerbose, pattern, allpatterns, clearcaches, bestguess_stats
 from time import perf_counter
 from collections import defaultdict
 import statistics
 
 setVerbose(False)
-solutions = [s for s in solutionlist.split(",")]
 
 def BGY(p):
   return p.replace('.','B')

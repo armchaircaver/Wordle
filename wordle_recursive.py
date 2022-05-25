@@ -1,4 +1,4 @@
-from wordlists import solutionlist, sortedalloptionlist
+from wordlists import solutions, alloptions
 #import wordle_solver
 from time import perf_counter
 from collections import defaultdict
@@ -10,24 +10,16 @@ verbose=False
 def setVerbose(x):
   verbose=x
 
-solutions = [s for s in solutionlist.split(",")]
-alloptions = [s for s in sortedalloptionlist.split(",")]
+print(len(solutions),"solutions, ",len(alloptions), "alloptions")
 allpatterns = [ ''.join(x) for x in product('.GY',repeat=5) ]
 
 highest_used_shortlist = 0 # the highest positioned item in shortlist
 
 # estimate of number of guesses to complete, for a list of solutions
 # of a certain size
-estimate_to_complete = [x**1.1 - 1 + x  for x in range(1000)]
-estimate_to_complete[0]=0
-estimate_to_complete[1]=1
-estimate_to_complete[2]=3
-
-
-#------------------------------------------------------------------------------------------------------------
-def reset():
-  global solutions
-  solutions = [s for s in solutionlist.split(",")]
+estimate_to_complete = [x**1.1 - 1  for x in range(1000)]
+estimate_to_complete[0:4]=[0, 0, 1, 2.55]
+#print( estimate_to_complete[0:7])
 
 #------------------------------------------------------------------------------------------------------------
 patterncache = defaultdict(str)
@@ -246,9 +238,11 @@ def bestguess(solutions, printProgress=False):
     a = avg( solsbypattern, bestavg )
 
     if printProgress:
-      print(guess, squaresum, f"av={a}")
-      for p in solsbypattern:
-        print ("  ", p,":",solsbypattern[p])
+      if a < bestavg:
+        print(f"'{guess}', average to complete: {a}")
+      else:
+        print(f"'{guess}' not as good as '{bestguess}'")
+        
 
 
     if a < bestavg:
